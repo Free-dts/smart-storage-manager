@@ -1,0 +1,42 @@
+# ═══════════════════════════════════════════════════════════════
+# 3. docker-compose.yml
+# ═══════════════════════════════════════════════════════════════
+
+---
+version: "3.7"
+
+services:
+  web:
+    image: ghcr.io/umbrel/smart-storage-manager:v1.0.0
+    restart: on-failure
+    stop_grace_period: 1m
+    ports:
+      - "8850:80"
+    volumes:
+      # صلاحيات للوصول للأقراص
+      - /dev:/dev
+      - /sys:/sys
+      - /run/udev:/run/udev:ro
+      # مجلدات التخزين
+      - ${APP_DATA_DIR}/config:/config
+      - ${APP_DATA_DIR}/data:/data
+      # الوصول لمجلدات النظام (قراءة فقط)
+      - /mnt:/host-mnt:ro
+      - /etc:/host-etc:ro
+    environment:
+      - TZ=UTC
+      - PUID=1000
+      - PGID=1000
+    privileged: true
+    cap_add:
+      - SYS_ADMIN
+      - MKNOD
+    devices:
+      - /dev/fuse
+    networks:
+      - umbrel_main_network
+
+networks:
+  umbrel_main_network:
+    external: true
+

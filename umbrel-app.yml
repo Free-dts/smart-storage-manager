@@ -1,0 +1,267 @@
+# ═══════════════════════════════════════════════════════════════
+# umbrel-app.yml - Smart Storage Manager for Umbrel
+# Version: 2.0.0
+# Manifest Version: 2
+# Compatibility: Umbrel OS, Docker 20.10+
+# Author: Umbrel Community Team
+# ═══════════════════════════════════════════════════════════════
+
+manifestVersion: 2
+
+# Basic Application Information
+id: smart-storage-manager
+category: storage
+name: Smart Storage Manager
+version: "2.0.0"
+title: Smart Storage Manager for Umbrel
+tagline: Intelligent storage management with MergerFS + SnapRAID
+
+# Description
+description: >
+  Smart Storage Manager provides comprehensive storage management
+  for Umbrel with automatic disk detection, intelligent pooling using
+  MergerFS, and data protection through SnapRAID.
+  
+  Key Features:
+  • 🔍 Automatic disk discovery and classification
+  • ⚡ Transparent file system pooling with MergerFS
+  • 🛡️ Data protection and recovery with SnapRAID
+  • 🌐 Modern web-based management interface
+  • 📊 Real-time monitoring and statistics
+  • 🔔 Smart notifications and alerts
+  • 🔄 Automated maintenance and optimization
+  • 📱 Responsive design for all devices
+  
+  Perfect for expanding your Umbrel storage capacity while
+  maintaining data integrity and system performance.
+
+# Development and Repository Information
+developer: Umbrel Community
+website: https://github.com/Free-dts/smart-storage-manager
+support: https://github.com/Free-dts/smart-storage-manager/issues
+repo: https://github.com/Free-dts/smart-storage-manager
+submitter: Umbrel Community
+submission: https://github.com/Free-dts/smart-storage-manager/pulls
+
+# Technical Information
+port: 8850
+protocol: http
+path: ""
+
+# Architecture Support
+architecture:
+  - x86_64
+  - aarch64
+  - armv7
+
+# Umbrel Compatibility
+minUmbrelVersion: "0.14"
+tableOfContent: true
+compatibility: umbrelOS
+
+# Network and Security
+torOnly: false
+hidden: false
+
+# Gallery Images
+gallery:
+  - "1.jpg"
+  - "2.jpg"
+  - "3.jpg"
+  - "4.jpg"
+  - "5.jpg"
+
+# Default Credentials (Empty for security)
+defaultUsername: ""
+defaultPassword: ""
+
+# Dependencies
+dependencies:
+  - docker
+  - mergerfs
+  - snapraid
+  - smartmontools
+
+# Required Permissions
+permissions:
+  # Storage Access
+  - STORAGE_DOWNLOADS_DATA
+  - STORAGE_DOWNLOADS_SYSTEM
+  - STORAGE_DOWNLOADS_RO
+  
+  # System Access
+  - SYSTEM_INFO
+  - SYSTEM_DOCKER
+  - SYSTEM_OTTBACKUP
+  
+  # Network Access
+  - NETWORK_WAN
+  - NETWORK_LAN
+  
+  # Hardware Access
+  - SYSTEM_HARDWARE
+  - SYSTEM_HARDWARE_CPU
+  - SYSTEM_HARDWARE_DISK
+  - SYSTEM_HARDWARE_DISK_INTEL
+  
+  # Mount Operations
+  - SYSTEM_MOUNT_UNMOUNT
+  - SYSTEM_MOUNT_UNMOUNT_OTHER_DISKS
+
+# Docker Configuration
+buildArgs:
+  - GIT_COMMIT=${GIT_COMMIT}
+  - BUILD_DATE=${BUILD_DATE}
+  - VERSION=${APP_VERSION}
+
+# Metadata
+tags:
+  - storage
+  - raid
+  - mergerfs
+  - snapraid
+  - filesystem
+  - pool
+  - protection
+  - monitoring
+  - maintenance
+
+# Release Information
+releaseNotes: |
+  ## Version 2.0.0 - Modernized Edition
+  
+  ### ✨ New Features
+  - Complete script modernization with Bash 5.x compliance
+  - Enhanced error handling and logging
+  - Improved Umbrel integration
+  - Comprehensive backup and rollback system
+  - Advanced monitoring and health checks
+  
+  ### 🔧 Improvements
+  - Better package management with version pinning
+  - Enhanced security with input validation
+  - Improved installation reliability
+  - Better resource usage monitoring
+  - Enhanced API documentation
+  
+  ### 🐛 Bug Fixes
+  - Fixed installation issues on ARM platforms
+  - Improved Docker container management
+  - Fixed logging rotation issues
+  - Enhanced error recovery mechanisms
+  
+  ### 🛡️ Security
+  - Input validation and sanitization
+  - Secure defaults and hardening
+  - Rate limiting and protection
+  - Audit logging and monitoring
+  
+  ### 📚 Documentation
+  - Comprehensive troubleshooting guides
+  - Enhanced API documentation
+  - Better installation instructions
+  - Improved configuration examples
+
+# File to copy to app directory
+files:
+  - path: "docker-compose.yml"
+  - path: "Dockerfile"
+  - path: "nginx.conf"
+  - path: "supervisord.conf"
+
+# Commands to run (if any)
+# commands: []
+
+# Environment variables (for Docker)
+# environment: {}
+
+# Volumes to mount (for Docker)
+# volumes: []
+
+# Devices to expose (for Docker)
+# devices: []
+
+# Capabilities to add (for Docker)
+# cap_add: []
+
+# Network mode (for Docker)
+# network_mode: "bridge"
+
+# Restart policy
+# restart: "unless-stopped"
+
+# Health check
+# health_check:
+#   cmd: ["curl", "-f", "http://localhost:8850/health"]
+#   interval: 30
+#   timeout: 10
+#   retries: 3
+
+# Resource limits
+# resources:
+#   limits:
+#     cpus: "2.0"
+#     memory: "2G"
+#   reservations:
+#     cpus: "0.5"
+#     memory: "512M"
+
+# Security context
+# security_context:
+#   run_as_user: 1000
+#   run_as_group: 1000
+#   read_only_root_filesystem: false
+#   allow_privilege_escalation: false
+#   capabilities:
+#     drop: ["ALL"]
+#     add: ["SYS_ADMIN", "MKNOD"]
+
+# App-specific metadata
+metadata:
+  # Icon information
+  icon: app/icon.png
+  iconSmall: app/icon-sm.png
+  
+  # Feature flags
+  features:
+    notifications: true
+    maintenance: true
+    backup: true
+    monitoring: true
+    
+  # Default configuration
+  defaults:
+    port: 8850
+    dataDir: "/data/smart-storage"
+    configDir: "/config/smart-storage"
+    logLevel: "INFO"
+    
+  # API configuration
+  api:
+    version: "v2"
+    prefix: "/api"
+    openapi: "3.0.3"
+    
+  # Documentation links
+  docs:
+    installation: "https://github.com/Free-dts/smart-storage-manager/wiki/Installation"
+    configuration: "https://github.com/Free-dts/smart-storage-manager/wiki/Configuration"
+    troubleshooting: "https://github.com/Free-dts/smart-storage-manager/wiki/Troubleshooting"
+    api: "https://github.com/Free-dts/smart-storage-manager/wiki/API-Reference"
+    security: "https://github.com/Free-dts/smart-storage-manager/wiki/Security"
+    
+  # Support information
+  support:
+    issues: "https://github.com/Free-dts/smart-storage-manager/issues"
+    discussions: "https://github.com/Free-dts/smart-storage-manager/discussions"
+    wiki: "https://github.com/Free-dts/smart-storage-manager/wiki"
+    chat: "https://t.me/umbrelcommunity"
+    
+  # Legal information
+  license: "MIT"
+  copyright: "© 2025 Umbrel Community Team"
+  
+  # Changelog
+  changelog:
+    url: "https://github.com/Free-dts/smart-storage-manager/blob/main/CHANGELOG.md"
+    format: "markdown"
